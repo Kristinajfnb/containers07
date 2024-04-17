@@ -67,7 +67,6 @@ function testPageConstructor() {
     return assertExpression($page instanceof Page, 'Page constructor works correctly', 'Page constructor failed');
 }
 
-// Test Render method
 function testPageRender() {
     $data = array('title' => 'Test Title', 'content' => 'Test Content');
     $page = new Page(__DIR__ . '/../templates/index.tpl');
@@ -77,7 +76,7 @@ function testPageRender() {
     return assertExpression($result !== false && !empty($output), 'Render method works correctly', 'Render method failed');
 }
 
-// Add tests
+
 $testFramework->add('Database connection', 'testDbConnection');
 $testFramework->add('Table count', 'testDbCount');
 $testFramework->add('Data create', 'testDbCreate');
