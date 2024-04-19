@@ -53,7 +53,25 @@ jobs:
         run: docker stop container
       - name: Remove the container
         run: docker rm container
-11. Отправляем все изменения в репозиторий на GitHub, переходим во вкладку Actions в репозитории и дожидаемся окончания выполнения.
+11. Создаем Dockerfile файл co следующим содержимым:
+FROM php:7.4-fpm as base
+
+RUN apt-get update && \
+    apt-get install -y sqlite3 libsqlite3-dev && \
+    docker-php-ext-install pdo_sqlite
+
+VOLUME ["/var/www/db"]
+
+COPY sql/schema.sql /var/www/db/schema.sql
+
+RUN echo "prepare database" && \
+    cat /var/www/db/schema.sql | sqlite3 /var/www/db/db.sqlite && \
+    chmod 777 /var/www/db/db.sqlite && \
+    rm -rf /var/www/db/schema.sql && \
+    echo "database is ready"
+
+COPY site /var/www/html
+12. Отправляем все изменения в репозиторий на GitHub, переходим во вкладку Actions в репозитории и дожидаемся окончания выполнения.
 
 ## Выводы
 Непрерывная интеграция с использованием GitHub Actions позволяет автоматизировать процесс сборки, тестирования и развертывания приложений, что улучшает качество и надежность кода, ускоряет процесс разработки и упрощает его управление.
