@@ -93,11 +93,10 @@ COPY site /var/www/html
 4. Что нужно добавить в файл .github/workflows/main.yml для того, чтобы удалять созданные образы после выполнения тестов?
    Для удаления созданных Docker-образов после выполнения тестов в файле .github/workflows/main.yml нужно добавить шаг по очистке Docker-окружения. Например:
 yaml
-Copy code
-steps:
-name: Run tests
-run: |
-### Запуск тестов
-### Добавить следующий шаг для очистки Docker-окружения
+ Copy code
+  steps:
+   name: Run tests
+    run: |
+
 name: Clean up Docker environment
 run: docker system prune -f
