@@ -95,9 +95,9 @@ COPY site /var/www/html
 yaml
 Copy code
 steps:
-  - name: Run tests
-    run: |
-      ### Запуск тестов
-  ### Добавить следующий шаг для очистки Docker-окружения
-  - name: Clean up Docker environment
-    run: docker system prune -f
+name: Run tests
+run: |
+### Запуск тестов
+### Добавить следующий шаг для очистки Docker-окружения
+name: Clean up Docker environment
+run: docker system prune -f
